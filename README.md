@@ -18,16 +18,22 @@
 # Dependencias 
 
 - gulp
+- bower
 - gulp-clean
 - gulp-clean-css
 - gulp-htmlmin
 - gulp-imagemin
 - gulp-minify
 - gulp-stylus
+- gulp-concat
+- gulp-plumber
 
 # Tarefas - Passo 3
-- gulp watch - [Compilar stylus para css]
-- gulp build - [Compilar a versao otimizada do projeto]
+- gulp watch - [Compilar e minificar HTML, CSS, JS e IMAGENS]
+- gulp build - [Build do projeto inteiro]
+- gulp clean - [Limpa a pasta dist]
+- gulp copy  - [Copia arquivos fora das tasks]
+
 
 # Outros
 - Instalar bibliotecas com Bower

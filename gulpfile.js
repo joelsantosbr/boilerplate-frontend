@@ -4,8 +4,9 @@ var clean = require('gulp-clean');
 var cleanCSS = require('gulp-clean-css');
 var plumber = require('gulp-plumber');
 var minify = require('gulp-minify');
-var htmlmin = require('gulp-htmlmin');
 var imagemin = require('gulp-imagemin');
+var concat = require('gulp-concat');
+var htmlmin = require('gulp-htmlmin');
 
 // Copiar arquivos para pasta dist
 gulp.task('copy', function() {
@@ -15,7 +16,7 @@ gulp.task('copy', function() {
 
 // Apaga os arquivos da pasta dist
 gulp.task('clean', function() {
-    return gulp.src('dist0', {read: false})
+    return gulp.src('dist/', {read: false})
         .pipe(clean());
 });
 
@@ -35,16 +36,16 @@ gulp.task('minify-css', function() {
     .pipe(gulp.dest('dist/assets/css/'));
 });
 
-// // Minificar HTML
-// gulp.task('minify-html', function() {
-//   return gulp.src('src/**/*.html')
-//     .pipe(htmlmin({collapseWhitespace: true}))
-//     .pipe(gulp.dest('dist/'))
-// });
+// Minificar HTML
+gulp.task('minify-html', function() {
+  return gulp.src('src/**/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('dist/'))
+});
 
 // Minificar JS
 gulp.task('minify-js', function() {
-  gulp.src('src/assets/js/*.js')
+  gulp.src('src/assets/js.all/*.js')
     .pipe(minify({
         ext:{
             src:'-debug.js',
@@ -54,6 +55,12 @@ gulp.task('minify-js', function() {
         ignoreFiles: ['.combo.js', '-min.js']
     }))
     .pipe(gulp.dest('dist/assets/js/'))
+});
+
+gulp.task('scripts', function() {
+  return gulp.src('src/assets/js/**/*.js')
+    .pipe(concat('all.js'))
+    .pipe(gulp.dest('src/assets/js.all/'));
 });
 
 // Otimizar Imagens
@@ -70,8 +77,12 @@ gulp.task('imagemin', function() {
 });
 
 /* Alias */
-gulp.task('optimize', ['minify-js', 'minify-css', 'imagemin']);
+gulp.task('optimize', ['scripts', 'minify-css', 'imagemin', 'minify-html', 'minify-js']);
 gulp.task('build', ['clean', 'copy', 'optimize']);
 gulp.task('watch', function(){
     gulp.watch('src/assets/stylus/**/*.styl', ['stylus']);
+    gulp.watch('src/assets/js/**/*.js', ['scripts']);
+    gulp.watch('src/assets/css/*.css', ['minify-css']);
+    gulp.watch('src/assets/js/*.js', ['minify-js']);
+    gulp.watch('src/**/*.html', ['minify-html']);
 })
