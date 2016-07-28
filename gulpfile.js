@@ -3,10 +3,9 @@ var stylus = require('gulp-stylus');
 var clean = require('gulp-clean');
 var cleanCSS = require('gulp-clean-css');
 var plumber = require('gulp-plumber');
-var minify = require('gulp-minify');
 var imagemin = require('gulp-imagemin');
-var concat = require('gulp-concat');
 var htmlmin = require('gulp-htmlmin');
+var uglify = require('gulp-uglifyjs');
 
 // Copiar arquivos para pasta dist
 gulp.task('copy', function() {
@@ -44,23 +43,12 @@ gulp.task('minify-html', function() {
 });
 
 // Minificar JS
-gulp.task('minify-js', function() {
-  gulp.src('src/assets/js.all/*.js')
-    .pipe(minify({
-        ext:{
-            src:'-debug.js',
-            min:'.js'
-        },
-        exclude: ['tasks'],
-        ignoreFiles: ['.combo.js', '-min.js']
+gulp.task('uglify', function() {
+  gulp.src('src/assets/js/**/*.js')
+    .pipe(uglify('all.js', {
+      outSourceMap: true
     }))
     .pipe(gulp.dest('dist/assets/js/'))
-});
-
-gulp.task('scripts', function() {
-  return gulp.src('src/assets/js/**/*.js')
-    .pipe(concat('all.js'))
-    .pipe(gulp.dest('src/assets/js.all/'));
 });
 
 // Otimizar Imagens
@@ -77,12 +65,11 @@ gulp.task('imagemin', function() {
 });
 
 /* Alias */
-gulp.task('optimize', ['scripts', 'minify-css', 'imagemin', 'minify-html', 'minify-js']);
+gulp.task('optimize', ['minify-css', 'imagemin', 'minify-html', 'uglify']);
 gulp.task('build', ['clean', 'copy', 'optimize']);
 gulp.task('watch', function(){
     gulp.watch('src/assets/stylus/**/*.styl', ['stylus']);
-    gulp.watch('src/assets/js/**/*.js', ['scripts']);
     gulp.watch('src/assets/css/*.css', ['minify-css']);
-    gulp.watch('src/assets/js/*.js', ['minify-js']);
+    gulp.watch('src/assets/js/**/*.js', ['uglify']);
     gulp.watch('src/**/*.html', ['minify-html']);
 })

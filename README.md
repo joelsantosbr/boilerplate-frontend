@@ -23,9 +23,8 @@
 - gulp-clean-css
 - gulp-htmlmin
 - gulp-imagemin
-- gulp-minify
 - gulp-stylus
-- gulp-concat
+- gulp-uglify
 - gulp-plumber
 
 # Tarefas - Passo 3
