@@ -1,0 +1,146 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: local('Open Sans Light'), local('OpenSans-Light'),
+         url('./opensans/opensans-light.woff2') format('woff2'),
+         url('./opensans/opensans-light.woff') format('woff'),
+         url('./opensans/opensans-light.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 300;
+}
+@font-face {
+    font-family: 'Open Sans';
+    src:
+     local('Open Sans'), local('OpenSans'),
+     url('./opensans/opensans-regular.woff2') format('woff2'),
+         url('./opensans/opensans-regular.woff') format('woff'),
+         url('./opensans/opensans-regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+    font-family: 'Open Sans';
+    src: 
+        local('Open Sans Bold'), local('OpenSans-Bold'),
+        url('./opensans/opensans-bold.woff2') format('woff2'),
+         url('./opensans/opensans-bold.woff') format('woff'),
+         url('./opensans/opensans-bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 700;
+}
+@font-face {
+    font-family: 'Open Sans';
+    src: 
+        local('Open Sans Extrabold'), local('OpenSans-Extrabold'),
+        url('./opensans/opensans-extrabold.woff2') format('woff2'),
+         url('./opensans/opensans-extrabold.woff') format('woff'),
+         url('./opensans/opensans-extrabold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Open Sans';
+    src: 
+        local('Open Sans Italic'), local('OpenSans-Italic'),
+        url('./opensans/opensans-italic.woff2') format('woff2'),
+         url('./opensans/opensans-italic.woff') format('woff'),
+         url('./opensans/opensans-italic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src:    url('./icomoon/fonts/icomoon.eot?en22i0');
+    src:    url('./icomoon/fonts/icomoon.eot?en22i0#iefix') format('embedded-opentype'),
+        url('./icomoon/fonts/icomoon.ttf?en22i0') format('truetype'),
+        url('./icomoon/fonts/icomoon.woff?en22i0') format('woff'),
+        url('./icomoon/fonts/icomoon.svg?en22i0#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-configuration1:before {
+    content: "\e90e";
+}
+.icon-list1:before {
+    content: "\e90f";
+}
+.icon-messagebox1:before {
+    content: "\e911";
+}
+.icon-peoples6:before {
+    content: "\e912";
+}
+.icon-recycle1:before {
+    content: "\e913";
+}
+.icon-shild1:before {
+    content: "\e914";
+}
+.icon-arrowdown1:before {
+    content: "\e901";
+}
+.icon-book1:before {
+    content: "\e902";
+}
+.icon-certifield1:before {
+    content: "\e903";
+}
+.icon-computer1:before {
+    content: "\e904";
+}
+.icon-peoples2:before {
+    content: "\e905";
+}
+.icon-peoples3:before {
+    content: "\e906";
+}
+.icon-peoples4:before {
+    content: "\e908";
+}
+.icon-peoples5:before {
+    content: "\e90c";
+}
+.icon-webcam1:before {
+    content: "\e909";
+}
+.icon-alvo1:before {
+    content: "\e900";
+}
+.icon-arrow-down1:before {
+    content: "\e917";
+}
+.icon-facebook2:before {
+    content: "\e907";
+}
+.icon-instagram1:before {
+    content: "\e90a";
+}
+.icon-linkedin1:before {
+    content: "\e90b";
+}
+.icon-marker1:before {
+    content: "\e90d";
+}
+.icon-skype1:before {
+    content: "\e910";
+}
+.icon-whatsapp2:before {
+    content: "\e91c";
+}
+
