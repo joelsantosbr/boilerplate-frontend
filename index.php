@@ -73,6 +73,8 @@
       <a href="./mods/newsletter.php" class="list-group-item">Newsletter</a>
       <a href="./mods/modal.php" class="list-group-item">Modal</a>
       <a href="./mods/grid-programatic.php" class="list-group-item">Grid Programatica</a>
+      <a href="./mods/posts.php" class="list-group-item">Posts</a>
+      <a href="./mods/about.php" class="list-group-item">About</a>
     </div>
     </div>
   </div>
