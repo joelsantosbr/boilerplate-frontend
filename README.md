@@ -26,13 +26,16 @@
 - gulp-stylus
 - gulp-uglify
 - gulp-plumber
+- gulp-concat
+- gulp-rename
+- browser-sync
 
 # Tarefas - Passo 3
-- gulp watch - [Compilar e minificar HTML, CSS, JS e IMAGENS]
 - gulp build - [Build do projeto inteiro]
+- gulp start - [Inicia servidor estático, faz reload ao modificar arquivos e compila/minifica JS, HTML e CSS]
+- gulp watch - [Compilar e minificar HTML, CSS e JS]
 - gulp clean - [Limpa a pasta dist]
 - gulp copy  - [Copia arquivos fora das tasks]
 
-
 # Outros
-- Instalar bibliotecas com Bower
+- Instalar bibliotecas com Bower [Directory = src/assets/libs/]

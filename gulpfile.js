@@ -5,11 +5,28 @@ var cleanCSS = require('gulp-clean-css');
 var plumber = require('gulp-plumber');
 var imagemin = require('gulp-imagemin');
 var htmlmin = require('gulp-htmlmin');
-var uglify = require('gulp-uglifyjs');
+var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var browserSync = require('browser-sync').create();
+
+// Static server
+gulp.task('start', ['watch'], function() {
+    browserSync.init({
+        server: {
+            baseDir: "./dist/"
+        }
+    });
+    gulp.watch('src/assets/stylus/**/*.styl', ['stylus']);
+    gulp.watch('src/assets/css/*.css', ['minify-css']);
+    gulp.watch('src/assets/js/**/*.js', ['uglify']);
+    gulp.watch('src/**/*.html', ['minify-html']);
+    gulp.watch('dist/**/*').on('change', browserSync.reload);
+});
 
 // Copiar arquivos para pasta dist
 gulp.task('copy', function() {
-    return gulp.src(['src/assets/{img,font}/**/*'], {base: 'src'})
+    return gulp.src(['src/assets/{img,font,libs}/**/*'], {base: 'src'})
         .pipe(gulp.dest('dist/'));
 });
 
@@ -43,13 +60,15 @@ gulp.task('minify-html', function() {
 });
 
 // Minificar JS
-gulp.task('uglify', function() {
-  gulp.src('src/assets/js/**/*.js')
-    .pipe(uglify('all.js', {
-      outSourceMap: true
-    }))
-    .pipe(gulp.dest('dist/assets/js/'))
+gulp.task('uglify', function(){
+    return gulp.src('src/assets/js/**/*.js')
+        .pipe(concat('all.js'))
+        .pipe(gulp.dest('dist/assets/js/'))
+        .pipe(rename('all.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/assets/js/'));
 });
+
 
 // Otimizar Imagens
 gulp.task('imagemin', function() {
