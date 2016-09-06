@@ -47,6 +47,13 @@ gulp.task('stylus', function(){
     .pipe(gulp.dest('source/stylesheets/'))
 });
 
+// Minificar HTML
+gulp.task('minify-html', function() {
+  return gulp.src('source/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('dist/'))
+});
+
 // Minificar JS
 gulp.task('uglify', function(){
     return gulp.src('source/scripts/**/*.js')
@@ -86,11 +93,12 @@ gulp.task('imagemin', function() {
 // Escuta
 
 /* Alias */
-gulp.task('default', ['stylus', 'uglify', 'imagemin', 'copy', 'minify-css', 'browser-sync', 'watch']);
+gulp.task('default', ['stylus', 'uglify', 'imagemin', 'copy', 'minify-css', 'minify-html', 'browser-sync', 'watch']);
 gulp.task('watch', function(){
     gulp.watch('source/images/**/*', ['imagemin']);
     gulp.watch('source/stylus/**/*.styl', ['stylus']);
     gulp.watch('source/stylesheets/*.css', ['minify-css']);
+    gulp.watch('source/*.html', ['minify-html']);
     gulp.watch('source/scripts/**/*.js', ['uglify']);
     gulp.watch(['source/{fonts,libraries}/**/*'], ['copy']);
 });

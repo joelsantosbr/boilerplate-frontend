@@ -10,32 +10,32 @@
 
 # Como usar - Passo 1
 
-- Clone este repositorio para sua maquina, ele agora e sua pasta principal.
+- Clone este repositorio para sua maquina.
 
-# Iniciar projeto - Passo 2
+# Instalar dependencias do projeto - Passo 2
 - npm install
 
 # Dependencias 
 
 - gulp
-- bower
+- autoprefixer-stylus
+- browser-sync 
 - gulp-clean
-- gulp-clean-css
+- gulp-clean-css 
+- gulp-concat
 - gulp-htmlmin
 - gulp-imagemin
+- gulp-plumber
+- gulp-rename
 - gulp-stylus
 - gulp-uglify
-- gulp-plumber
-- gulp-concat
-- gulp-rename
-- browser-sync
+- jeet
+- kouto-swiss 
+- rupture
 
 # Tarefas - Passo 3
-- gulp build - [Build do projeto inteiro]
-- gulp start - [Inicia servidor estático, faz reload ao modificar arquivos e compila/minifica JS, HTML e CSS]
-- gulp watch - [Compilar e minificar HTML, CSS e JS]
-- gulp clean - [Limpa a pasta dist]
-- gulp copy  - [Copia arquivos fora das tasks]
+- gulp [Faz a mágica toda]
+- gulp watch - [Fica escutando todas as mudanças e executa as tarefas]
 
 # Outros
-- Instalar bibliotecas com Bower [Directory = src/assets/libs/]
+- Instalar bibliotecas com Bower [Directory = source/libraries]
