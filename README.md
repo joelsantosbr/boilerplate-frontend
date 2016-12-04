@@ -28,6 +28,7 @@
 - gulp-plumber
 - gulp-rename
 - gulp-stylus
+- gulp-duojs
 - gulp-uglify
 - jeet
 - kouto-swiss 
