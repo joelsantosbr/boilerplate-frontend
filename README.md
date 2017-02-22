@@ -1,42 +1,38 @@
 # Boilerplate Frontend
 
-- Usar esse boilerplate para todos os novos projetos web.
+- Usar este boilerplate para projetos front end.
 
-# Requisitos
+# Tecnologias
 
 - Node.js
 - Bower
 - Gulp
+- Stylus
+- Browser Sync
 
 # Como usar - Passo 1
-
-- Clone este repositorio para sua maquina.
-
-# Instalar dependencias do projeto - Passo 2
 - npm install
 
 # Dependencias 
 
 - gulp
-- autoprefixer-stylus
 - browser-sync 
 - gulp-clean
 - gulp-clean-css 
+- gulp-sourcemaps
 - gulp-concat
 - gulp-htmlmin
 - gulp-imagemin
 - gulp-plumber
-- gulp-rename
 - gulp-stylus
-- gulp-duojs
 - gulp-uglify
 - jeet
 - kouto-swiss 
 - rupture
 
-# Tarefas - Passo 3
-- gulp [Faz a mágica toda]
-- gulp watch - [Fica escutando todas as mudanças e executa as tarefas]
+# Tarefas - Passo 2
+- gulp [Divirta-se]
+- gulp watch
 
-# Outros
-- Instalar bibliotecas com Bower [Directory = source/libraries]
+# Obs
+- Instalar bibliotecas com Bower [Directory = source/vendor]
