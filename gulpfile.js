@@ -7,33 +7,31 @@ imagemin = require('gulp-imagemin'),
 htmlmin = require('gulp-htmlmin'),
 uglify = require('gulp-uglify'),
 concat = require('gulp-concat'),
-rename = require('gulp-rename'),
 jeet        = require('jeet'),
 rupture     = require('rupture'),
 koutoSwiss  = require('kouto-swiss'),
-prefixer    = require('autoprefixer-stylus'),
-duo = require('gulp-duojs'),
-browserSync = require('browser-sync');
+browserSync = require('browser-sync'),
+sourcemaps = require('gulp-sourcemaps');
 
 
 gulp.task('browser-sync', function() {
     browserSync({
         server: {
-            baseDir: 'dist/'
+            baseDir: 'public/'
         }
     });
 });
 
-// Copiar arquivos para pasta dist
+// Copiar arquivos para pasta public
 gulp.task('copy', function() {
-    return gulp.src(['source/{fonts,libraries,images}/**/*'], {base: 'source'})
-        .pipe(gulp.dest('dist'))
+    return gulp.src(['source/{fonts,vendor,img}/**/*'], {base: 'source'})
+        .pipe(gulp.dest('public'))
         .pipe(browserSync.reload({stream:true}))
 });
 
 // Apaga os arquivos
 gulp.task('clean', function() {
-    return gulp.src('dist/', {read: false})
+    return gulp.src('public/', {read: false})
         .pipe(clean({force: true}));
 });
 
@@ -42,47 +40,47 @@ gulp.task('stylus', function(){
     gulp.src('source/stylus/main.styl')
     .pipe(plumber())
     .pipe(stylus({
-        use:[koutoSwiss(), prefixer(), jeet(), rupture()]
+        use:[koutoSwiss(), jeet(), rupture()]
     }))
-    .pipe(gulp.dest('source/stylesheets/'))
+    .pipe(gulp.dest('source/css/'))
 });
 
 // Minificar HTML
 gulp.task('minify-html', function() {
-  return gulp.src('source/*.html')
+  return gulp.src('source/**/*.html')
     .pipe(htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest('dist/'))
+    .pipe(gulp.dest('public/'))
     .pipe(browserSync.reload({stream:true}))
 });
 
-// DuoJS
-gulp.task('duojs', function () {
-  gulp.src('source/scripts/all.js')
-    .pipe(duo({standalone: 'foobar'}))
-    .pipe(gulp.dest('source/scripts/build/'));
-});
-
 // Minificar JS
-gulp.task('uglify', function(){
-    return gulp.src('source/scripts/build/all.js')
-        .pipe(rename('bundle.js'))
-        .pipe(plumber())
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/scripts/'))
+var scripts = [
+    './source/vendor/jquery/dist/jquery.js',
+    './source/js/*.js'
+];
+gulp.task('js', function() {
+    return gulp.src(scripts)
+        .pipe(sourcemaps.init({loadMaps: true}))
+            .pipe(concat('bundle.js'))
+            .pipe(uglify())
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('public/js'))
         .pipe(browserSync.reload({stream:true}))
 });
 
 // Minificar CSS
 gulp.task('minify-css', function() {
-  return gulp.src('source/stylesheets/*.css')
+  return gulp.src('source/css/*.css')
+    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('dist/stylesheets/'))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('public/css/'))
     .pipe(browserSync.reload({stream:true}))
 });
 
 // Otimizar Imagens
 gulp.task('imagemin', function() {
-    return gulp.src('source/images/**/*')
+    return gulp.src('source/img/**/*')
         .pipe(plumber())
         .pipe(imagemin({
             progressive: true,
@@ -93,20 +91,19 @@ gulp.task('imagemin', function() {
             interlaced: true,
             optimizationLevel: 3
         }))
-        .pipe(gulp.dest('dist/images/'))
+        .pipe(gulp.dest('public/img/'))
         .pipe(browserSync.reload({stream:true}))
 });
 
 // Escuta
 
 /* Alias */
-gulp.task('default', ['stylus','duojs', 'uglify', 'imagemin', 'copy', 'minify-css', 'minify-html', 'browser-sync', 'watch']);
+gulp.task('default', ['stylus', 'js', 'imagemin', 'copy', 'minify-css', 'minify-html', 'watch', 'browser-sync']);
 gulp.task('watch', function(){
-    gulp.watch('source/images/**/*', ['imagemin']);
+    gulp.watch('source/img/**/*', ['imagemin']);
     gulp.watch('source/stylus/**/*.styl', ['stylus']);
-    gulp.watch('source/stylesheets/*.css', ['minify-css']);
+    gulp.watch('source/css/*.css', ['minify-css']);
     gulp.watch('source/*.html', ['minify-html']);
-    gulp.watch('source/scripts/all.js', ['duojs']);
-    gulp.watch('source/scripts/build/all.js', ['uglify']);
-    gulp.watch(['source/{fonts,libraries}/**/*'], ['copy']);
+    gulp.watch('source/js/*.js', ['js']);
+    gulp.watch(['source/{fonts,vendor}/**/*'], ['copy']);
 });
