@@ -55,7 +55,7 @@ gulp.task('stylus', function(){
 
 // Minificar HTML
 gulp.task('minify-html', function() {
-  return gulp.src('app/**/*.html')
+  return gulp.src('app/*.html')
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('public/'))
     .pipe(browserSync.reload({stream:true}));
