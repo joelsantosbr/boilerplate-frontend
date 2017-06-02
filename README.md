@@ -1,38 +1,36 @@
 # Boilerplate Frontend
 
-- Usar este boilerplate para projetos front end.
+## Required
 
-# Tecnologias
+- node.js
+- bower
+- gulp
+- stylus
 
-- Node.js
-- Bower
-- Gulp
-- Stylus
-- Browser Sync
+## Getting started
 
-# Como usar - Passo 1
-- npm install
+- npm install && bower install && gulp
 
-# Dependencias 
+## Tasks
 
 - gulp
-- browser-sync 
+- gulp watch
+
+## Dependencies 
+
+- autoprefixer
+- browser-sync
+- gulp
 - gulp-clean
-- gulp-clean-css 
+- cssnano
 - gulp-sourcemaps
 - gulp-concat
 - gulp-htmlmin
 - gulp-imagemin
 - gulp-plumber
+- gulp-postcss
 - gulp-stylus
 - gulp-uglify
 - jeet
-- kouto-swiss 
+- kouto-swiss
 - rupture
-
-# Tarefas - Passo 2
-- gulp [Divirta-se]
-- gulp watch
-
-# Obs
-- Instalar bibliotecas com Bower [Directory = source/vendor]
